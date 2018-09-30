@@ -137,33 +137,27 @@ class App extends React.Component {
         const minCount = this.getValue(options, "minCount");
         const maxCount = this.getValue(options, "maxCount");
 
-        const toDo = () => {
-            let results;
+        let results;
+        if (this.state.apiResponse) {
+            results = this.state.apiResponse.items.slice();
 
-            if (this.state.apiResponse) {
-                results = this.state.apiResponse.items.slice();
+            if (minPrice) results = results.filter(item => item.price >= minPrice);
+            if (maxPrice) results = results.filter(item => item.price <= maxPrice);
 
-                if (minPrice) results = results.filter(item => item.price >= minPrice);
-                if (maxPrice) results = results.filter(item => item.price <= maxPrice);
+            if (minCount) results = results.filter(item => item.count >= minCount);
+            if (maxCount) results = results.filter(item => item.count <= maxCount);
 
-                if (minCount) results = results.filter(item => item.count >= minCount);
-                if (maxCount) results = results.filter(item => item.count <= maxCount);
+        } else {
+            results = null;
+        }
 
-            } else {
-                results = null;
-            }
-
-            this.setState({
-                minPrice: minPrice,
-                maxPrice: maxPrice,
-                minCount: minCount,
-                maxCount: maxCount,
-                itemsToShow: results
-            });
-        };
-
-        if (this.timeout) clearTimeout(this.timeout);
-        this.timeout = setTimeout(toDo.bind(this), 1000);
+        this.setState({
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            minCount: minCount,
+            maxCount: maxCount,
+            itemsToShow: results
+        });
     }
 
     onMinPriceFilterChange(event) {
