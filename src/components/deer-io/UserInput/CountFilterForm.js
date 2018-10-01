@@ -2,6 +2,7 @@ import React from "react";
 import {Input} from "reactstrap";
 import {DelayInput} from "react-delay-input";
 
+
 class SearchForm extends React.Component {
     render() {
         return (

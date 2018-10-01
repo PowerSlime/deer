@@ -6,6 +6,7 @@ import ModalWindow from "./ModalWindow";
 
 import styles from "./style.sass";
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -52,8 +53,8 @@ class App extends React.Component {
 
     getShopInfo(item) {
         if (item) {
-            if (item.shop_id) {
-                return this.state.apiResponse.shops.find(shop => shop.id === item.shop_id);
+            if (item["shop_id"]) {
+                return this.state.apiResponse.shops.find(shop => shop.id === item["shop_id"]);
             }
         }
     }
@@ -89,7 +90,7 @@ class App extends React.Component {
         fetch(url)
             .then(response => response.json())
             .then(response => {
-                const sorted = response.items.slice().sort((a, b) => a.price - b.price);
+                const sorted = response.items.slice().sort((a, b) => a["price"] - b["price"]);
 
                 return {
                     items: sorted,
@@ -119,7 +120,11 @@ class App extends React.Component {
         //
         // If we didn't do that, while cleaning the input the state will be the same
         // And after fetching data or handle it we'll get always "bad" results...
-        return this.isExactlyNaN(options[key]) ? NaN : (options[key] || this.state[key] || null);
+        if (this.isExactlyNaN(options[key]) || options[key] === 0) {
+            return options[key];
+        } else {
+            return options[key] || this.state[key] || null;
+        }
     }
 
     filterSearchResult(options) {
@@ -136,11 +141,11 @@ class App extends React.Component {
         if (this.state.apiResponse) {
             results = this.state.apiResponse.items.slice();
 
-            if (minPrice) results = results.filter(item => item.price >= minPrice);
-            if (maxPrice) results = results.filter(item => item.price <= maxPrice);
+            if (minPrice) results = results.filter(item => item["price"] >= minPrice);
+            if (maxPrice) results = results.filter(item => item["price"] <= maxPrice);
 
-            if (minCount) results = results.filter(item => item.count >= minCount);
-            if (maxCount) results = results.filter(item => item.count <= maxCount);
+            if (minCount) results = results.filter(item => item["count"] >= minCount);
+            if (maxCount) results = results.filter(item => item["count"] <= maxCount);
 
         } else {
             results = null;
@@ -156,7 +161,6 @@ class App extends React.Component {
     }
 
     onMinPriceFilterChange(event) {
-        console.log(event.target.value);
         this.filterSearchResult({
             minPrice: parseFloat(event.target.value)
         });

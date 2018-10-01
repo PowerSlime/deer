@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Moment from "moment";
 
+
 class ModalWindow extends React.Component {
     constructor(props) {
         super(props);
@@ -58,9 +59,9 @@ class ModalWindow extends React.Component {
                         <strong>Дата открытия:</strong> {Moment.unix(this.props.data.shopInfo.since).format("DD/MM/YYYY")}
                     </p>
                     <p>
-                        <strong>Наименование товара:</strong> {this.props.data.item.title}<br />
-                        <strong>Кол-во:</strong> {this.props.data.item.count}<br />
-                        <strong>Цена:</strong> {this.props.data.item.price} руб
+                        <strong>Наименование товара:</strong> {this.props.data.item["title"]}<br />
+                        <strong>Кол-во:</strong> {this.props.data.item["count"]}<br />
+                        <strong>Цена:</strong> {this.props.data.item["price"]} руб
                     </p>
                 </div>
             );

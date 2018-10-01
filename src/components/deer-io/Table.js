@@ -1,6 +1,7 @@
 import React from "react";
 import { Alert } from "reactstrap";
 
+
 class Table extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -37,21 +38,13 @@ class Table extends React.PureComponent {
                             onClick={() => this.props.openModalWindow(item, index)}
                         >
                             <td>{index + 1}</td>
-                            <td>{item.title}</td>
-                            <td>{item.price}</td>
-                            <td>{item.count}</td>
+                            <td>{item["title"]}</td>
+                            <td>{item["price"]}</td>
+                            <td>{item["count"]}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-        );
-    }
-
-    renderWatingMessage() {
-        return (
-            <div className="alert alert-primary" role="alert">
-                Получение данных с сервера.
-            </div>
         );
     }
 
@@ -94,7 +87,7 @@ class Table extends React.PureComponent {
                 </div>
             );
         } else {
-            body = this.renderErrorMessage(this.props.errorMessage);
+            return this.renderErrorMessage(this.props.errorMessage);
         }
     }
 }
