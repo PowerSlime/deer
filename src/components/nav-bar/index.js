@@ -1,11 +1,20 @@
 import React from "react";
 import FontAwesome from "react-fontawesome";
+import {
+    Collapse, Nav,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    NavItem,
+    NavLink} from "reactstrap";
 
-class Navbar extends React.Component {
+class NavigationBar extends React.Component {
     constructor(props) {
         super(props);
 
+        this.toggle = this.toggle.bind(this);
         this.state = {
+            isOpen: false,
             baseUrl: "#",
             siteName: "DeerIO Enchanted",
             menu: [
@@ -20,43 +29,44 @@ class Navbar extends React.Component {
         };
     }
 
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
 
     render() {
         return (
             <div className="container-fluid bg-dark">
                 <div className="container">
                     <div className="row">
-                        <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-xl-12">
-                            <a className="navbar-brand" href={this.state.baseUrl}>{this.state.siteName}</a>
-
-                            <div className="collapse navbar-collapse mr-auto" id="navbarNavDropdown-6">
-                                {/* Menu links */}
-                                <ul className="navbar-nav mr-auto">
-                                    {this.state.menu.map((item, index) =>
-                                        <li
-                                            className="nav-item"
-                                            key={`navbar-menu-index-${index}`}
-                                        >
-                                            <a className="nav-link" href={item.link}>{item.title}</a>
-                                        </li>
-                                    )}
-                                </ul>
-
-                                {/* Socials */}
-                                <ul className="navbar-nav">
-                                    {this.state.socials.map((item, index) =>
-                                        <li
-                                            className="nav-item"
-                                            key={`navbar-social-index-${index}`}
-                                        >
-                                            <a className="nav-link" href={item.link} target="_blank">
-                                                <FontAwesome name={item.className}/>
-                                            </a>
-                                        </li>
-                                    )}
-                                </ul>
-                            </div>
-                        </nav>
+                        <div className="col-12">
+                            <Navbar color="dark" dark expand="md">
+                                <NavbarBrand href={this.state.baseUrl}>{this.state.siteName}</NavbarBrand>
+                                <NavbarToggler onClick={this.toggle} />
+                                <Collapse isOpen={this.state.isOpen} navbar>
+                                    <Nav className="mr-auto" navbar>
+                                        {this.state.menu.map((item, index) =>
+                                            <NavItem key={`navbar-menu-index-${index}`}>
+                                                <NavLink href={item.link}>{item.title}</NavLink>
+                                            </NavItem>
+                                        )}
+                                    </Nav>
+                                    <Nav navbar>
+                                        {this.state.socials.map((item, index) =>
+                                            <NavItem key={`navbar-social-index-${index}`}>
+                                                <NavLink
+                                                    href={item.link}
+                                                    target="_blank"
+                                                >
+                                                    <FontAwesome name={item.className}/>
+                                                </NavLink>
+                                            </NavItem>
+                                        )}
+                                    </Nav>
+                                </Collapse>
+                            </Navbar>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,4 +75,4 @@ class Navbar extends React.Component {
 }
 
 
-export default Navbar;
+export default NavigationBar;
