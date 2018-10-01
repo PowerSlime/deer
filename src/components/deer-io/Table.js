@@ -36,7 +36,7 @@ class Table extends React.PureComponent {
                             key={index}
                             onClick={() => this.props.openModalWindow(item, index)}
                         >
-                            <td>{index}</td>
+                            <td>{index + 1}</td>
                             <td>{item.title}</td>
                             <td>{item.price}</td>
                             <td>{item.count}</td>
