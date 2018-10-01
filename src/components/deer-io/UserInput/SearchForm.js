@@ -11,7 +11,7 @@ class SearchForm extends React.Component {
                     element={Input}
                     delayTimeout={2000}
                     type="text"
-                    placeholder="Поиск..."
+                    placeholder="Поиск... Например: proxy, mail.ru, instagram"
                     onChange={this.props.onSearchTextChange}
                 />
             </div>
