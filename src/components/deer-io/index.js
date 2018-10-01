@@ -79,39 +79,34 @@ class App extends React.Component {
     onSearchTextChange(event) {
         const newValue = event.target.value;
 
-        let toDo = () => {
-            this.setState({
-                searchText: newValue,
-                itemsToShow: null
-            });
+        this.setState({
+            searchText: newValue,
+            itemsToShow: null
+        });
 
-            const url = new URL(`https://deer.powerslime.ru/?q=${newValue}`);
+        const url = new URL(`https://deer.powerslime.ru/?q=${newValue}`);
 
-            fetch(url)
-                .then(response => response.json())
-                .then(response => {
-                    const sorted = response.items.slice().sort((a, b) => a.price - b.price);
+        fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                const sorted = response.items.slice().sort((a, b) => a.price - b.price);
 
-                    return {
-                        items: sorted,
-                        shops: response.shops
-                    };
-                })
-                .then(json => this.setState({
-                    apiResponse: json,
-                    // itemsToShow: json.items
-                }))
-                .then(() => this.filterSearchResult())
-                .catch(reason => this.setState({
-                    fetchError: {
-                        message: reason.message,
-                        name: reason.name
-                    }
-                }));
-        };
-
-        if (this.timeout) clearTimeout(this.timeout);
-        this.timeout = setTimeout(toDo.bind(this), 1000);
+                return {
+                    items: sorted,
+                    shops: response.shops
+                };
+            })
+            .then(json => this.setState({
+                apiResponse: json,
+                // itemsToShow: json.items
+            }))
+            .then(() => this.filterSearchResult())
+            .catch(reason => this.setState({
+                fetchError: {
+                    message: reason.message,
+                    name: reason.name
+                }
+            }));
     }
 
     isExactlyNaN(value) {
@@ -161,6 +156,7 @@ class App extends React.Component {
     }
 
     onMinPriceFilterChange(event) {
+        console.log(event.target.value);
         this.filterSearchResult({
             minPrice: parseFloat(event.target.value)
         });
