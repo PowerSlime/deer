@@ -1,20 +1,19 @@
 import React from "react";
-import {Input} from "reactstrap";
-import {DelayInput} from "react-delay-input";
+import InputForm from "./InputForm";
 
 
 class SearchForm extends React.Component {
     render() {
         return (
-            <div className="input-group">
-                <DelayInput
-                    element={Input}
-                    delayTimeout={2000}
-                    type="text"
-                    placeholder="Поиск... Например: proxy, mail.ru, instagram"
-                    onChange={this.props.onSearchTextChange}
-                />
-            </div>
+            <InputForm
+                delayTimeout={2000}
+                type="text"
+                placeholder="Поиск... Например: proxy, mail.ru, instagram"
+                onChange={this.props.onSearchTextChange}
+                seamless={true}
+                icon="search"
+                prepend
+            />
         );
     }
 }
