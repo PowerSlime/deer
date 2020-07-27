@@ -1,0 +1,32 @@
+@import "node_modules/bootstrap/scss/_functions.scss"
+@import "node_modules/bootstrap/scss/_variables.scss"
+@import "node_modules/bootstrap/scss/_mixins.scss"
+
+.Container
+    display: inline-flex
+    flex-direction: column
+
+    .ArrowUp
+        margin-bottom: 3px
+
+.ArrowUp
+    width: 0
+    height: 0
+    border-left: 5px solid transparent
+    border-right: 5px solid transparent
+
+    border-bottom: 5px solid $secondary
+
+    &.Active
+        border-bottom-color: $light
+
+.ArrowDown
+    width: 0
+    height: 0
+    border-left: 5px solid transparent
+    border-right: 5px solid transparent
+
+    border-top: 5px solid $secondary
+
+    &.Active
+        border-top-color: $light
