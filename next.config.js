@@ -3,6 +3,8 @@ require("dotenv").config();
 const withTM = require("next-transpile-modules")(["lodash-es"]);
 
 const nextConfig = {
+    assetPrefix: process.env.BASE_PATH,
+    basePath: process.env.BASE_PATH,
     target: "serverless",
     poweredByHeader: false,
     generateEtags: false,
@@ -21,6 +23,7 @@ const nextConfig = {
         return config;
     },
     env: {
+        BASE_PATH: process.env.BASE_PATH,
         BACKEND_URL: process.env.BACKEND_URL,
     },
 };

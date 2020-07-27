@@ -11,7 +11,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="shortcut icon" href="/static/favicon.png" />
+                    <link rel="shortcut icon" href={`${process.env.BASE_PATH}/static/favicon.png`} />
                 </Head>
                 <body>
                     <Main />
